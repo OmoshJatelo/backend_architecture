@@ -1,12 +1,15 @@
 const express = require('express');
 const  cors = require("cors");
 
+const logger = require("./middlewares/logger.js")
+
 //create express app
 const app  = express();
 
 //middleware
 app.use(express.json());
 app.use(cors());
+app.use(logger);
 //register a route for users
 const userRoute = require("./routes/user.routes.js");
 
