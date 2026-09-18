@@ -1,15 +1,15 @@
 const userService = require("../services/users.services.js");
 
 //GET /api/users
-const getAllUsers = (req,res) =>{
-	const users = userService.getAllUsers();
+const getAllUsers = async(req,res) =>{
+	const users = await userService.getAllUsers();
 	res.json(users);}
 
 //GET /api/users/:id
 
-const getUser = (req,res) =>{
+const getUser = async(req,res) =>{
 	const id = req.params.id;
-	const user = userService.getUser(id);
+	const user = await userService.getUser(id);
 	
 	if(!user){
 	  return res.status(404).json({message:"user not found!"});
@@ -19,17 +19,17 @@ const getUser = (req,res) =>{
 
 //POST /api/users
 
-const createUser =(req,res)=>{
+const createUser = async(req,res)=>{
 	const userData =req.body;
-	const newUser = userService.createUser(userData);
+	const newUser = await userService.createUser(userData);
 	return res.status(201).json(newUser);
 };
 
 //DELETE /api/users/:id
 
-const deleteUser = (req,res) =>{
+const deleteUser = async (req,res) =>{
 	const id = req.params.id;
-	const deletedUser =userService.deleteUser(id);
+	const deletedUser =await userService.deleteUser(id);
 	
 	if(!deletedUser){
 	   return res.status(404).json({message:"User not Found!"});

@@ -1,10 +1,14 @@
+const connectdb = require("./config/db.js");
 const express = require('express');
 const  cors = require("cors");
+
 
 const logger = require("./middlewares/logger.js")
 
 //create express app
 const app  = express();
+
+
 
 //middleware
 app.use(express.json());
@@ -19,4 +23,9 @@ app.get("/",(req,res)=>{
 	res.send("App running");})
 const  PORT =3000;
 
-app.listen(PORT,()=>console.log(`srver running on port ${PORT}`))
+connectdb().then(()=>{
+	app.listen(PORT,()=>console.log(`srver running on port ${PORT}`))
+
+});
+
+

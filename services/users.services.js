@@ -1,38 +1,26 @@
-let users =[
-	{
-	 id:1,
-	 name:"Omosh",
-	 email:"omosh@email.com"
-	},
-	{
-	 id:2,
-	 name:"Jatelo",
-	 email:"jatelo@gmail.com"
-	}
-];
 
-const getAllUsers =()=>{return users;};
+const User =require("../modells/user.modells.js");
 
-const getUser = (id) => {
-  return users.find((user) => user.id === Number(id));
+
+const getAllUsers = async()=>{
+	return await User.find();
 };
 
-const createUser = (userData) => {
-	const newUser ={
-		id:users.length+1,
+const getUser = async(id) => {
+  return await User.findById(id);
+};
+
+const createUser = async(userData) => {
+	return await User.create({
+		
 		name:userData.name,
 		email:userData.email
-	};
-	users.push(newUser);
-	return newUser;
+	});
+
 };
 
-const deleteUser =(id) =>{
-	const index = users.findIndex(user =>user.id===Number(id));
-	if(index===-1) return null;
-	const userToDelete = users[index];
-	users.splice(index, 1);
-	return userToDelete;
+const deleteUser =async(id) =>{
+	return await User.findByIdAndDelete(id);
 };
 
 module.exports ={
