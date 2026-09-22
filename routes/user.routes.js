@@ -1,4 +1,5 @@
 const express = require("express");
+const validateUser =require("../middlewares/user.validation.js");
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.get("/", userController.getAllUsers);
 router.get("/:id", userController.getUser);
 
 // POST /api/users
-router.post("/", userController.createUser);
+router.post("/",validateUser, userController.createUser);
 
 // DELETE /api/users/:id
 router.delete("/:id", userController.deleteUser);
